@@ -1,0 +1,46 @@
+To intercept and read the data received on the WebSocket in your MATLAB program, you can use the MatlabWebSocket library, which is a simple library consisting of a WebSocket server and client for MATLAB built on Java-WebSocket. Here's a step-by-step guide:
+Step 1: Install the MatlabWebSocket Library
+Download the MatlabWebSocket library from the GitHub repository: https://github.com/jebej/MatlabWebSocket
+Follow the installation instructions provided in the repository.
+Step 2: Create a WebSocket Client
+Create a new MATLAB script or function.
+Import the MatlabWebSocket library using the import statement.
+Create a WebSocket client object using the MatlabWebSocket class.
+
+
+Here's a sample code snippet:
+matlab
+% Import the MatlabWebSocket library
+import MatlabWebSocket.*;
+
+% Create a WebSocket client object
+wsClient = MatlabWebSocket('ws://localhost:8080');
+
+% Connect to the WebSocket server
+wsClient.connect();
+
+% Send a message to the WebSocket server
+wsClient.send('Hello, WebSocket!');
+
+Step 3: Receive Data from the WebSocket Server
+Use the wsClient.onMessage method to receive data from the WebSocket server.
+Implement a callback function to process the received data.
+
+
+Here's a sample code snippet:
+matlab
+% Define a callback function to process the received data
+function onDataReceived(wsClient, message)
+    % Process the received data
+    fprintf('Received data: %s\n', message);
+end
+
+% Set the callback function for the onMessage event
+wsClient.onMessage = @onDataReceived;
+
+Step 4: Close the WebSocket Connection
+Use the wsClient.close method to close the WebSocket connection when you're done.
+Here's a sample code snippet:
+matlab
+% Close the WebSocket connection
+wsClient.close();
